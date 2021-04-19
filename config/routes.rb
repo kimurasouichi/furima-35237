@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  root to: 'furimas#index'
-  get 'furimas/index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get 'items/index'
+  root to: 'items#index'
 end
