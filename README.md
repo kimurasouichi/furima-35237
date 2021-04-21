@@ -29,11 +29,11 @@
 | address        | string      | null: false        |    
 | building_name  | string      |                    |
 | phone_number   | string      | null: false        |
-| user           | references  | foreign_key: true  |
+| purchase       | references  | foreign_key: true  |
 
 ### Association
 
-- has_one :purchase
+- belongs_to :purchase
 - belongs_to :user
 
 
@@ -61,10 +61,10 @@
 
 |    Column      |    Type     |      Options       |
 | ------------   | ----------  | ------------------ |
-| delivery       | references  | foreign_key: true  |
+| user           | references  | foreign_key: true  |
 | item           | references  | foreign_key: true  |
 
 ### Association
 
-- belongs_to :delivery
+- has_one :delivery
 - belongs_to :item
