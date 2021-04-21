@@ -33,7 +33,7 @@
 
 ### Association
 
-
+belongs_to :purchase
 
 
 ## items テーブル
