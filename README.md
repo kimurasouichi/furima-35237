@@ -1,24 +1,70 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+|     Column        |    Type   |           Options           |
+| ---------------   | --------- | --------------------------  |
+| nickname          | string    | null: false                 |
+| email             | string    | null: false, unique: true   |
+| encrypted_password| string    | null: false                 |
+| last_name         | string    | null: false                 |
+| fist_name         | string    | null: false                 |
+| last_name_kana    | string    | null: false                 |
+| fist_name_kana    | string    | null: false                 |
+| birth_day         | date      | null: false                 |
+ 
+### Association
 
-* Ruby version
+- has_many :purchases
+- has_many :items
 
-* System dependencies
 
-* Configuration
+## deliverys テーブル
 
-* Database creation
+|    Column      |    Type     |      Options       |
+| ------------   | ----------  | ------------------ |
+| post_code      | string      | null: false        |
+| area_id        | integer     | null: false        |
+| city           | string      | null: false        |
+| address        | string      | null: false        |    
+| building_name  | string      |                    |
+| phone_number   | string      | null: false        |
+| purchase       | references  | foreign_key: true  |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+belongs_to :purchase
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## items テーブル
 
-* ...
+|    Column      |    Type     |      Options       |
+| ------------   | ----------  | ------------------ |
+| name           | string      | null: false        |
+| description    | text        | null: false        |  
+| category_id    | integer      | null: false        |
+| condition_id   | integer     | null: false        |
+| burden_id      | integer     | null: false        |
+| area_id        | integer     | null: false        |
+| day_id         | integer     | null: false        |
+| price          | integer     | null: false        |
+| user           | references  | foreign_key: true  |
+
+### Association
+
+- has_one :purchase
+- belongs_to :user
+
+
+## purchase テーブル
+
+|    Column      |    Type     |      Options       |
+| ------------   | ----------  | ------------------ |
+| user           | references  | foreign_key: true  |
+| item           | references  | foreign_key: true  |
+
+### Association
+
+- has_one :delivery
+- belongs_to :item
+- belongs_to :user
