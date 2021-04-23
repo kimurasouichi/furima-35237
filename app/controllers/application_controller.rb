@@ -8,10 +8,3 @@ class ApplicationController < ActionController::Base
                                       keys: [:nickname, :last_name, :first_name, :last_name_kana, :first_name_kana, :birth_day])
   end
 end
-
-# t.string :nickname, null: false
-# t.string :last_name, null: false
-# t.string :first_name, null: false
-# t.string :last_name_kana, null: false
-# t.string :first_name_kana, null: false
-# t.date :birth_day, null: false
