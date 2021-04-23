@@ -118,6 +118,18 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include 'First name kana kana Full-width katakana characters'
       end
+
+      it 'last_name_kanaがカタカナ以外の全角文字だと登録できないこと ' do
+        @user.last_name_kana = '/\A[ぁ-んァ-ン一-龥]/'
+        @user.valid?
+        expect(@user.errors.full_messages).to include 'Last name kana kana Full-width katakana characters'
+      end
+
+      it 'first_name_kanaがカタカナ以外の全角文字だと登録できないこと ' do
+        @user.first_name_kana = '/\A[ぁ-んァ-ン一-龥]/'
+        @user.valid?
+        expect(@user.errors.full_messages).to include 'First name kana kana Full-width katakana characters'
+      end
     end
   end
 end
