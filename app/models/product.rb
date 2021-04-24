@@ -7,9 +7,12 @@ class Product < ApplicationRecord
   belongs_to :day
 
   validates :title, :text, presence: true
-  validates :category_id, numericality: { other_than: 1 }
-  validates :condition_id, numericality: { other_than: 1 }
-  validates :burden_id, numericality: { other_than: 1 }
-  validates :area_id, numericality: { other_than: 1 }
-  validates :day_id, numericality: { other_than: 1 }
+
+  with_options presence: true, numericality: { other_than: 1 } do
+    validates :category_id
+    validates :condition_id
+    validates :burden_id
+    validates :area_id
+    validates :day_id
+  end
 end

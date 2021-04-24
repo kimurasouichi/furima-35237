@@ -13,66 +13,69 @@ RSpec.describe Item, type: :model do
     end
     context '商品出品の保存ができない時' do
       it '商品画像が空では保存できない' do
-        @itme.image = ''
-        @itme.valid?
-        expect(@item.errors.full_messages).to include "Imag can't be blank"
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Image can't be blank"
       end
 
       it '商品名が空では保存できない' do
-        @itme.name = ''
-        @itme.valid?
-        expect(@item.errors.full_messages).to include "Email can't be blank"
+        @item.name = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Name can't be blank"
       end
 
       it '商品の説明が空では保存できない' do
         @item.description = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include "Password confirmation doesn't match Password"
+        expect(@item.errors.full_messages).to include "Description can't be blank"
       end
 
       it 'カテゴリーが空では保存できない' do
         @item.category_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include 'Password is too short (minimum is 6 characters)'
+        expect(@item.errors.full_messages).to include "Category can't be blank"
       end
 
       it '商品の状態についての情報が空では保存できない' do
         @item.condition_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include 'Password is too short (minimum is 6 characters)'
+        expect(@item.errors.full_messages).to include "Condition can't be blank"
       end
 
       it '配送料の負担についての情報が空では保存できない' do
         @item.burden_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include 'Password is too short (minimum is 6 characters)'
+        expect(@item.errors.full_messages).to include "Burden can't be blank"
       end
 
       it '発送元の地域の情報が空では保存できない' do
         @item.area_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include 'Password is too short (minimum is 6 characters)'
+        expect(@item.errors.full_messages).to include "Area can't be blank"
       end
 
       it '発送までの日数の情報が空では保存できない' do
         @item.day_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include 'Password is too short (minimum is 6 characters)'
+        expect(@item.errors.full_messages).to include "Day can't be blank"
       end
 
       it '販売価格の情報が空では保存できない' do
         @item.price = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include 'Password is too short (minimum is 6 characters)'
+        expect(@item.errors.full_messages).to include "Price can't be blank"
       end
 
       it '販売価格は、¥300〜¥9,999,999の間でないと保存できない' do
+        @item.price = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include 'Price Out of setting range'
       end
 
       it '販売価格は半角数字でないと保存できない' do
-        @item.price = '/\A[0-9]+\z/'
+        @item.price = 'あいうえお'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Password Include both letters and numbers')
+        expect(@item.errors.full_messages).to include 'Price Out of setting range'
       end
     end
   end
