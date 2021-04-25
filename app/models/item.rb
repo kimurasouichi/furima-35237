@@ -2,10 +2,15 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  validates :name, presence: true, length: { maximum: 40 }
-  validates :description, presence: true, length: { maximum: 1000 }
-  validates :category_id, presence: true
-  validates :image, presence: true
+  with_options presence: true do
+   validates :name
+   validates :description
+   validates :image
+  end
+
+  validates :name, length: { maximum: 40 }
+  validates :description, length: { maximum: 1000 }
+  
 
   validates :price, presence: true, format: { with: /\A[0-9]+\z/, message: 'Half-width number' },
                     numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'Out of setting range' }

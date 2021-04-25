@@ -66,7 +66,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include "Price can't be blank"
       end
 
-      it '販売価格は、¥300〜¥9,999,999の間でないと保存できない' do
+      it '販売価格は、¥299〜¥10,000,000の間でないと保存できない' do
         @item.price = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include 'Price Out of setting range'
@@ -77,6 +77,37 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include 'Price Out of setting range'
       end
+
+      it 'active_hash、category_idのidが１のときは登録できない' do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include 'Category Select'
+      end
+
+      it 'active_hash、condition_idのidが１のときは登録できない' do
+        @item.condition_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include 'Condition Select'
+      end
+
+      it 'active_hash、burden_idのidが１のときは登録できない' do
+        @item.burden_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include 'Burden Select'
+      end
+
+      it 'active_hash、area_idのidが１のときは登録できない' do
+        @item.area_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include 'Area Select'
+      end
+
+      it 'active_hash、day_idのidが１のときは登録できない' do
+        @item.day_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include 'Day Select'
+      end
+
     end
   end
 end
