@@ -3,14 +3,13 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   with_options presence: true do
-   validates :name
-   validates :description
-   validates :image
+    validates :name
+    validates :description
+    validates :image
   end
 
   validates :name, length: { maximum: 40 }
   validates :description, length: { maximum: 1000 }
-  
 
   validates :price, presence: true, format: { with: /\A[0-9]+\z/, message: 'Half-width number' },
                     numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'Out of setting range' }
