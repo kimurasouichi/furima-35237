@@ -108,10 +108,22 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include 'Area Select'
       end
 
-      it 'active_hash、day_idのidが１のときは登録できない' do
-        @item.day_id = 1
+      it '商品名が４１文字以上では登録できない' do
+        @item.name = 'a' * 41
         @item.valid?
-        expect(@item.errors.full_messages).to include 'Day Select'
+        expect(@item.errors.full_messages).to include 'Name is too long (maximum is 40 characters)'
+      end
+
+      it '商品説明が１００１文字以上では登録できない' do
+        @item.description = 'a' * 1001
+        @item.valid?
+        expect(@item.errors.full_messages).to include 'Description is too long (maximum is 1000 characters)'
+      end
+
+      it 'userが紐付いていない場合は登録できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
