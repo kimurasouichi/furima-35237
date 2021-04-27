@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_itmes, except: [:index, :new, :create]
+  before_action :set_itme, except: [:index, :new, :create]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :contributor_confirmation, only: [:edit, :update]
 
@@ -36,7 +36,7 @@ class ItemsController < ApplicationController
 
   private
 
-  def set_itmes
+  def set_itme
     @item = Item.find(params[:id])
   end
 
