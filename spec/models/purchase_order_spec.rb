@@ -6,7 +6,7 @@ RSpec.describe PurchaseOrder, type: :model do
       user = FactoryBot.create(:user)
       item = FactoryBot.create(:item)
       @purchase_order = FactoryBot.build(:purchase_order, user_id: user.id, item_id: item.id)
-      sleep 2
+      sleep 3
     end
 
     context '内容に問題ない場合' do
@@ -26,10 +26,10 @@ RSpec.describe PurchaseOrder, type: :model do
         @purchase_order.valid?
         expect(@purchase_order.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
       end
-      it 'area_idを選択していないと保存できないこと' do
-        @purchase_order.area_id = 0
+      it 'active_hash、area_idのidが１のときは登録できない' do
+        @purchase_order.area_id = 1
         @purchase_order.valid?
-        expect(@purchase_order.errors.full_messages).to include("Area can't be blank")
+        expect(@purchase_order.errors.full_messages).to include('Area Select')
       end
       it 'cityが空だと保存できないこと' do
         @purchase_order.city = ''
@@ -59,6 +59,11 @@ RSpec.describe PurchaseOrder, type: :model do
         @purchase_order.item_id = nil
         @purchase_order.valid?
         expect(@purchase_order.errors.full_messages).to include("Item can't be blank")
+      end
+      it 'tokenが空では登録できないこと' do
+        @purchase_order.token = nil
+        @purchase_order.valid?
+        expect(@purchase_order.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
