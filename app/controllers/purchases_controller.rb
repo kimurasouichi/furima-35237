@@ -1,13 +1,13 @@
 class PurchasesController < ApplicationController
+  before_action :set_itme
   before_action :authenticate_user!
+  before_action :contributor_confirmation, only: [:index]
 
   def index
-    @item = Item.find(params[:item_id])
     @purchase_order = PurchaseOrder.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @purchase_order = PurchaseOrder.new(purchase_params)
     if @purchase_order.valid?
       pay_item
@@ -19,6 +19,10 @@ class PurchasesController < ApplicationController
   end
 
   private
+
+  def set_itme
+    @item = Item.find(params[:item_id])
+  end
 
   def purchase_params
     params.require(:purchase_order).permit(:post_code, :area_id, :city, :address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: current_user.id,
@@ -32,5 +36,9 @@ class PurchasesController < ApplicationController
       card: purchase_params[:token], # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
+  end
+
+  def contributor_confirmation
+    redirect_to root_path unless current_user != @item.user
   end
 end
