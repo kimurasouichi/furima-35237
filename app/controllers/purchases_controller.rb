@@ -1,5 +1,5 @@
 class PurchasesController < ApplicationController
-  before_action :set_itme
+  before_action :set_itme except: [:create]
   before_action :authenticate_user!
   before_action :contributor_confirmation, only: [:index]
 
