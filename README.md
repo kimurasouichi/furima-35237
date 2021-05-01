@@ -19,7 +19,7 @@
 - has_many :items
 
 
-## deliverys テーブル
+## orders テーブル
 
 |    Column      |    Type     |      Options       |
 | ------------   | ----------  | ------------------ |
@@ -56,7 +56,7 @@ belongs_to :purchase
 - belongs_to :user
 
 
-## purchase テーブル
+## purchases テーブル
 
 |    Column      |    Type     |      Options       |
 | ------------   | ----------  | ------------------ |
