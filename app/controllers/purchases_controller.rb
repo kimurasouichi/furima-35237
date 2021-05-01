@@ -1,5 +1,5 @@
 class PurchasesController < ApplicationController
-  before_action :set_itme except: [:create]
+  before_action :set_purchases, only: [:index, :create]
   before_action :authenticate_user!
   before_action :contributor_confirmation, only: [:index]
 
@@ -20,12 +20,12 @@ class PurchasesController < ApplicationController
 
   private
 
-  def set_itme
+  def set_purchases
     @item = Item.find(params[:item_id])
   end
 
   def purchase_params
-    params.require(:purchase_order).permit(:post_code, :area_id, :city, :address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: current_user.id,
+    params.require(:purchase_order).permit(:post_code, :area_id, :city, :address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id],
                                                                                                                        token: params[:token])
   end
 
