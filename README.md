@@ -65,6 +65,6 @@ belongs_to :purchase
 
 ### Association
 
-- has_one :delivery
+- has_one :order
 - belongs_to :item
 - belongs_to :user
