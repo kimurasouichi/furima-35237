@@ -17,7 +17,7 @@ class PurchaseOrder
 
   validates :phone_number, format: { with: /\A\d{10,11}\z/ }
 
-  validates :phone_number, format: { with: /\A[a-zA-Z0-9]+\z/ }
+  validates :phone_number, format: { with: /\A[0-9０-９]+\z/ }
 
   def save
     purchase = Purchase.create(user_id: user_id, item_id: item_id)
