@@ -1,7 +1,7 @@
 class PurchasesController < ApplicationController
   before_action :set_purchases, only: [:index, :create]
-  before_action :authenticate_user!
-  before_action :contributor_confirmation, only: [:index]
+  before_action :authenticate_user!, only: [:index, :create]
+  before_action :contributor_confirmation, only: [:index, :create]
 
   def index
     @purchase_order = PurchaseOrder.new
