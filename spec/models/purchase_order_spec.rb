@@ -45,10 +45,6 @@ RSpec.describe PurchaseOrder, type: :model do
         @purchase_order.valid?
         expect(@purchase_order.errors.full_messages).to include("Address can't be blank")
       end
-      it 'building_nameは空でも保存できること' do
-        @purchase_order.building_name = ''
-        expect(@purchase_order).to be_valid
-      end
       it 'phone_numberが空だと保存できないこと' do
         @purchase_order.phone_number = nil
         @purchase_order.valid?
