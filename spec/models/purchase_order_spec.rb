@@ -28,7 +28,7 @@ RSpec.describe PurchaseOrder, type: :model do
       it 'post_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
         @purchase_order.post_code = '1234567'
         @purchase_order.valid?
-        expect(@purchase_order.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
+        expect(@purchase_order.errors.full_messages).to include('Post code is invalid')
       end
       it 'active_hash、area_idのidが１のときは登録できない' do
         @purchase_order.area_id = 1
@@ -70,15 +70,15 @@ RSpec.describe PurchaseOrder, type: :model do
         @purchase_order.valid?
         expect(@purchase_order.errors.full_messages).to include('Phone number is invalid')
       end
-      it '電話番号は９桁以下では登録できないこと' do
-        @purchase_order.phone_number = '090123412'
+      it '電話番号は１１桁以内の数値でないと登録できないこと' do
+        @purchase_order.phone_number = '0901234123a'
         @purchase_order.valid?
         expect(@purchase_order.errors.full_messages).to include('Phone number is invalid')
       end
       it '電話番号は１２桁以上では登録できないこと' do
         @purchase_order.phone_number = '090123412345'
         @purchase_order.valid?
-        expect(@purchase_order.errors.full_messages).to include('Phone number is invalid')
+        expect(@purchase_order.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
       end
     end
   end
