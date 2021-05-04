@@ -80,6 +80,11 @@ RSpec.describe PurchaseOrder, type: :model do
         @purchase_order.valid?
         expect(@purchase_order.errors.full_messages).to include("電話番号は11文字以内で入力してください")
       end
+      it '電話番号は９桁以下では登録できないこと' do
+        @purchase_order.phone_number = '123456789'
+        @purchase_order.valid?
+        expect(@purchase_order.errors.full_messages).to include("電話番号は10桁または11桁で入力してください")
+      end
     end
   end
 end

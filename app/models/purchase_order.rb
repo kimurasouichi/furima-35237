@@ -16,6 +16,7 @@ class PurchaseOrder
   validates :area_id, numericality: { other_than: 1, message: "を選択してください" }
 
   validates :phone_number, format: { with: /\A[0-9]+\z/, message: "は半角数値で入力してください" }
+  validates :phone_number, format: { with: /\A\d{10,11}\z/, message: "は10桁または11桁で入力してください"}
   validates :phone_number, length: { maximum: 11 }
 
   def save
