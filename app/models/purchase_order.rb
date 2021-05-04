@@ -10,12 +10,12 @@ class PurchaseOrder
     validates :item_id
     validates :token
     validates :area_id
-    validates :post_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/ }
+    validates :post_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "は(-)つきでお願いします" }
   end
 
-  validates :area_id, numericality: { other_than: 1, message: 'Select' }
+  validates :area_id, numericality: { other_than: 1, message: "を選択してください" }
 
-  validates :phone_number, format: { with: /\A[0-9]+\z/ }
+  validates :phone_number, format: { with: /\A[0-9]+\z/, message: "は半角数値で入力してください" }
   validates :phone_number, length: { maximum: 11 }
 
   def save

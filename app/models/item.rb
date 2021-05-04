@@ -19,10 +19,10 @@ class Item < ApplicationRecord
   validates :name, length: { maximum: 40 }
   validates :description, length: { maximum: 1000 }
 
-  validates :price, presence: true, format: { with: /\A[0-9]+\z/, message: 'Half-width number' },
-                    numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'Out of setting range' }
+  validates :price, presence: true, format: { with: /\A[0-9]+\z/, message: "は数値で入力してください" },
+                    numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: "につきましては販売価格を参照ください" }
 
-  with_options presence: true, numericality: { other_than: 1, message: 'Select' } do
+  with_options presence: true, numericality: { other_than: 1, message: "を選択してください" } do
     validates :category_id
     validates :condition_id
     validates :burden_id
